@@ -2,4 +2,11 @@ from game.player import *
 from ui.uimanager import UIManager
 
 if __name__ == "__main__":
-    UIManager([AbsractPlayer(0), AI5Player(1), AI4Player(2)], 9).run()
+    UIManager(
+        [
+            AbsractPlayer(),
+            HumanPlayer(),      #JOUEUR 1
+            AI5Player()         #JOUEUR 2
+        ],
+        10  #DIMENSION DE LA GRILLE
+    ).run()

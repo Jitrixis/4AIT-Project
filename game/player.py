@@ -4,9 +4,15 @@ from game.board import VirtualBoard
 from ui.uiutils import UIUtils
 
 
-class AbsractPlayer():
-    def __init__(self, player):
-        self._player = player
+class AbsractPlayer:
+    PLAYER_NUMBER = 0
+
+    def __init__(self, player=None):
+        if player is not None:
+            self._player = player
+        else:
+            self._player = self.PLAYER_NUMBER
+            self.PLAYER_NUMBER += 1
 
     def get_player(self):
         return self._player
@@ -16,8 +22,8 @@ class AbsractPlayer():
 
 
 class HumanPlayer(AbsractPlayer):
-    def __init__(self, player):
-        super().__init__(player)
+    def __init__(self):
+        super().__init__()
 
     def run(self, semaphore_event, board):
         if semaphore_event is not None:
@@ -25,8 +31,8 @@ class HumanPlayer(AbsractPlayer):
 
 
 class AI1Player(AbsractPlayer):
-    def __init__(self, player):
-        super().__init__(player)
+    def __init__(self):
+        super().__init__()
 
     def run(self, semaphore_event, board):
         l = self._pos_of(self._available_square(board))
@@ -44,8 +50,8 @@ class AI1Player(AbsractPlayer):
 
 
 class AI2Player(AI1Player):
-    def __init__(self, player):
-        super().__init__(player)
+    def __init__(self):
+        super().__init__()
 
     def run(self, semaphore_event, board):
         l = self._pos_of(self._priority_square(board))
@@ -58,8 +64,8 @@ class AI2Player(AI1Player):
 
 
 class AI3Player(AI2Player):
-    def __init__(self, player):
-        super().__init__(player)
+    def __init__(self):
+        super().__init__()
 
     def run(self, semaphore_event, board):
         l = self._pos_of(self._priority_square(board))
@@ -76,8 +82,8 @@ class AI3Player(AI2Player):
 
 
 class AI4Player(AI3Player):
-    def __init__(self, player):
-        super().__init__(player)
+    def __init__(self):
+        super().__init__()
 
     def run(self, semaphore_event, board):
         l = self._pos_of(self._priority_square(board))
@@ -110,8 +116,8 @@ class AI4Player(AI3Player):
 
 
 class AI5Player(AI4Player):
-    def __init__(self, player):
-        super().__init__(player)
+    def __init__(self):
+        super().__init__()
 
     def run(self, semaphore_event, board):
         d = self._pos_of(self._dangerous_square(board))

@@ -73,18 +73,19 @@ class UIUtils:
     @classmethod
     def main_text(cls, text, color):
         cls.__text(text, (cls.PADDING + 20, cls.BOARD_SIZE * cls.SQUARE_SIZE + cls.PADDING + 20),
-                   color, "monospace", 50, cls.BACKGROUND_COLOR)
+                   color, "courrier", 50, cls.BACKGROUND_COLOR)
 
     @classmethod
     def second_text(cls, text):
         cls.__text(text, (cls.PADDING + 20, cls.BOARD_SIZE * cls.SQUARE_SIZE + cls.PADDING + 80),
-                   (0, 0, 0), "monospace", 20, cls.BACKGROUND_COLOR)
+                   (0, 0, 0), "courrier", 20, cls.BACKGROUND_COLOR)
 
     @classmethod
     def __text(cls, text, pos, color, font, size, background):
         myfont = pygame.font.SysFont(font, size)
         label = myfont.render(text, 1, color, background)
         cls.SURFACE.blit(label, pos)
+        pass
 
     @classmethod
     def debug_line(cls, pos, color=(255, 255, 0)):

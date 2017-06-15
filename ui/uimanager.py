@@ -11,16 +11,24 @@ class UIManager:
         self.__board = Board(size=size, num_player=len(self.__players) - 1)
         self.__semaphore_event = None
         pygame.init()
-        UIUtils.BOARD_SIZE = self.__board.get_size()
-        UIUtils.init_surface()
+        self.scale(self.__board.get_size())
         # stats
         # self.__stats = [0 for _ in range(len(self.__players))]
         # print(self.__players)
+
+    @classmethod
+    def scale(cls, size):
+        UIUtils.BOARD_SIZE = size
+        UIUtils.SQUARE_SIZE //= size//10+1
+        UIUtils.LINE_SIZE //= size//10+1
+        UIUtils.SQUARE_SIZE = UIUtils.SQUARE_SIZE if UIUtils.SQUARE_SIZE >= 4 else 4
+        UIUtils.LINE_SIZE = UIUtils.LINE_SIZE if UIUtils.LINE_SIZE >= 1 else 1
 
     def run(self):
         q = True
         while q:
             # GUI
+            UIUtils.init_surface()
             UIUtils.draw_squares(self.__board)
             UIUtils.draw_lines(self.__board)
             # EVENT
@@ -50,7 +58,7 @@ class UIManager:
                 # self.__semaphore_event = None
             else:
                 UIUtils.main_text('USER TURN ' + str(self.__board.get_cur_player()), (0, 0, 0))
-                UIUtils.second_text(str(self.__board.get_score()))
+                UIUtils.second_text("SCORE : " + str(self.__board.get_score()))
                 try:
                     self.__players[self.__board.get_cur_player()].run(self.__semaphore_event, self.__board)
                 except Exception as e:

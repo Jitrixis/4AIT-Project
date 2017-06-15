@@ -1,6 +1,6 @@
 class Board:
     def __init__(self, size=5, num_player=2):
-        self.__size = size if size % 2 == 1 else size + 1
+        self.__size = size
         self.__num_player = num_player if num_player >= 2 else 2
         self.__cur_player = 1
         self.__lines = [[Line((j, i)) for i in range(self.__size + j % 2)] for j in range(self.__size * 2 + 1)]
